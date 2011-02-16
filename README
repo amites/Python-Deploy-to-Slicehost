@@ -1,0 +1,39 @@
+Fast deploy a new Django Project to a Slicehost Slice
+
+Usage:
+    Set variables in config.py and then execute console, or run quit_new.py through terminal.
+
+What it does:
+Will take your existing project and deploy to a Slicehost Slice including:
+ - Create server entry to Apache sites-available and symlink to sites-enabled.
+ - Create project folder, create a fresh virtualenv, blank git repo and populate with the following structure:
+    PROJECT_ROOT_DIR
+     |--virtualenv
+     |   |--PROJECT_DIR
+     |   |--apache
+     |
+     |--repo
+
+    - PROJECT_ROOT_DIR: New dir created for your project.
+    - PROJECT_DIR: Dir created to host the project through apache/wsgi.
+    - apache: Includes WSGI deployment: site.wsgi
+	- Configured for use with virtualenv
+    - repo: Blank GIT repo to push to.
+	- Will be added as remote origin to your existing project repo
+
+ - Add a (sub)domain to your Slicehost Slice via the Slicehost API.
+
+
+Dependencies:
+ - Fabric - http://fabfile.org/
+    http://pypi.python.org/pypi/Fabrici
+ - jinja2 - http://jinja.pocoo.org/
+    http://pypi.python.org/pypi/Jinja2
+ - virtualenv - http://pypi.python.org/pypi/virtualenv
+    Not necessary though highly recommended - if not available script will adapt.
+
+This will likely act as a boiler plate for you since it has many dependencies regarding server setup.
+There are a number of hard coded variables that match my diretory structure which you may or may not agree with.
+
+Servers used: Ubuntu Server, Apache2, WSGI
+(Forks for other setups welcomed - NGINX etc...)
